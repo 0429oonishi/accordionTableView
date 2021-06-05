@@ -20,11 +20,6 @@ final class AccordionViewController: UIViewController {
         
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-                
-    }
-    
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -61,14 +56,13 @@ extension AccordionViewController: UITableViewDelegate {
                                       with: .automatic)
             self.tableView.endUpdates()
         }
-        headerView.onTapEvent = {
-            let sampleVC = SampleViewController.instaintiate()
-            self.present(sampleVC, animated: true, completion: nil)
-        }
+        headerView.delegate = self
         return headerView
     }
     
 }
+
+extension AccordionViewController: SectionHeaderViewDelegate { }
 
 extension AccordionViewController: UITableViewDataSource {
     

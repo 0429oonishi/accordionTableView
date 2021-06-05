@@ -7,13 +7,24 @@
 
 import UIKit
 
+protocol SectionHeaderViewDelegate: UIViewController {
+    func didTapped()
+}
+
+extension SectionHeaderViewDelegate {
+    func didTapped() {
+        let sampleVC = SampleViewController.instaintiate()
+        self.present(sampleVC, animated: true, completion: nil)
+    }
+}
+
 final class SectionHeaderView: UITableViewHeaderFooterView {
     
     static var identifier: String { String(describing: self) }
     static var nib: UINib { UINib(nibName: String(describing: self), bundle: nil) }
     var buttonDidTapped: (() -> Void)?
-    var onTapEvent: (() -> Void)?
     var isExpanded = false
+    var delegate: SectionHeaderViewDelegate?
     
     @IBOutlet private weak var view: UIView!
     @IBOutlet private weak var label: UILabel!
@@ -30,7 +41,7 @@ final class SectionHeaderView: UITableViewHeaderFooterView {
     }
     
     @objc private func didTapped() {
-        onTapEvent?()
+        delegate?.didTapped()
     }
     
     @IBAction private func buttonDidTapped(_ sender: UIButton) {
