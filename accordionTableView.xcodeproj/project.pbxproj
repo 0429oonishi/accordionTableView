@@ -15,6 +15,8 @@
 		AB93C282266B07C300C3AE8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB93C280266B07C300C3AE8F /* LaunchScreen.storyboard */; };
 		AB93C28B266B082D00C3AE8F /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB93C289266B082D00C3AE8F /* CustomTableViewCell.swift */; };
 		AB93C28C266B082D00C3AE8F /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB93C28A266B082D00C3AE8F /* CustomTableViewCell.xib */; };
+		AB93C293266B41A100C3AE8F /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB93C292266B41A100C3AE8F /* SectionHeaderView.swift */; };
+		AB93C295266B5EB000C3AE8F /* SectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB93C294266B5EB000C3AE8F /* SectionHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		AB93C283266B07C300C3AE8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB93C289266B082D00C3AE8F /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		AB93C28A266B082D00C3AE8F /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		AB93C292266B41A100C3AE8F /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
+		AB93C294266B5EB000C3AE8F /* SectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,8 @@
 				AB93C27B266B07BE00C3AE8F /* Main.storyboard */,
 				AB93C289266B082D00C3AE8F /* CustomTableViewCell.swift */,
 				AB93C28A266B082D00C3AE8F /* CustomTableViewCell.xib */,
+				AB93C292266B41A100C3AE8F /* SectionHeaderView.swift */,
+				AB93C294266B5EB000C3AE8F /* SectionHeaderView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -156,6 +162,7 @@
 			files = (
 				AB93C282266B07C300C3AE8F /* LaunchScreen.storyboard in Resources */,
 				AB93C27F266B07C300C3AE8F /* Assets.xcassets in Resources */,
+				AB93C295266B5EB000C3AE8F /* SectionHeaderView.xib in Resources */,
 				AB93C28C266B082D00C3AE8F /* CustomTableViewCell.xib in Resources */,
 				AB93C27D266B07BE00C3AE8F /* Main.storyboard in Resources */,
 			);
@@ -170,6 +177,7 @@
 			files = (
 				AB93C27A266B07BE00C3AE8F /* AccordionViewController.swift in Sources */,
 				AB93C276266B07BE00C3AE8F /* AppDelegate.swift in Sources */,
+				AB93C293266B41A100C3AE8F /* SectionHeaderView.swift in Sources */,
 				AB93C28B266B082D00C3AE8F /* CustomTableViewCell.swift in Sources */,
 				AB93C278266B07BE00C3AE8F /* SceneDelegate.swift in Sources */,
 			);

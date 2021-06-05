@@ -7,53 +7,21 @@
 
 import UIKit
 
-private struct Section {
+struct Section {
     var title: String
-    var titles: [String]
+    var values: [String]
     var expanded: Bool
-}
-
-final private class SectionHeaderView: UITableViewHeaderFooterView {
-    
-    var onTapEvent: ((Int) -> Void)?
-    var section: Int?
-    
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        
-        let tapGR = UITapGestureRecognizer(target: self, action: #selector(didTapped))
-        self.addGestureRecognizer(tapGR)
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configure(title: String, section: Int, onTapEvent: @escaping (Int) -> Void) {
-        self.textLabel?.text = title
-        self.section = section
-        self.onTapEvent = onTapEvent
-    }
-    
-    @objc private func didTapped(gestureRecognizer: UITapGestureRecognizer) {
-        guard let headerView = gestureRecognizer.view as? SectionHeaderView,
-              let section = headerView.section else { return }
-        onTapEvent?(section)
-    }
-    
 }
 
 final class AccordionViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     private var sections: [Section] = [Section(title: "Apple",
-                                               titles: ["mac book",
-                                                        "iPhone 12",
-                                                        "apple watch"],
+                                               values: ["mac book",
+                                                        "iPhone 12"],
                                                expanded: false),
                                        Section(title: "Microsoft",
-                                               titles: ["Windows",
+                                               values: ["Windows",
                                                         "Office",
                                                         "Surface"],
                                                expanded: false)
@@ -66,6 +34,8 @@ final class AccordionViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(CustomTableViewCell.nib,
                            forCellReuseIdentifier: CustomTableViewCell.identifier)
+        tableView.register(SectionHeaderView.nib,
+                           forHeaderFooterViewReuseIdentifier: SectionHeaderView.identifier)
         tableView.tableFooterView = UIView()
         
     }
@@ -76,20 +46,20 @@ final class AccordionViewController: UIViewController {
 extension AccordionViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 100
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return sections[indexPath.section].expanded ? 50 : 0
+        return sections[indexPath.section].expanded ? 100 : 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = SectionHeaderView()
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: SectionHeaderView.identifier) as! SectionHeaderView
         headerView.configure(title: sections[section].title, section: section) { [weak self] section in
             guard let self = self else { return }
             self.sections[section].expanded.toggle()
             self.tableView.beginUpdates()
-            self.sections[section].titles.enumerated().forEach { i, title in
+            self.sections[section].values.enumerated().forEach { i, title in
                 self.tableView.reloadRows(at: [IndexPath(row: i, section: section)], with: .automatic)
             }
             self.tableView.endUpdates()
@@ -106,13 +76,13 @@ extension AccordionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].titles.count
+        return sections[section].values.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier,
                                                  for: indexPath) as! CustomTableViewCell
-        let title = sections[indexPath.section].titles[indexPath.row]
+        let title = sections[indexPath.section].values[indexPath.row]
         cell.configure(title: title)
         return cell
     }

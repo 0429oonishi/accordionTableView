@@ -12,10 +12,10 @@ final class CustomTableViewCell: UITableViewCell {
     static var identifier: String { String(describing: self) }
     static var nib: UINib { UINib(nibName: String(describing: self), bundle: nil) }
     
-    @IBOutlet private weak var label: UILabel!
+    @IBOutlet private weak var textView: UITextView!
     
     func configure(title: String) {
-        label.text = title
+        textView.text = title
     }
     
 }
