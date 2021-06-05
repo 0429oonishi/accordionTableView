@@ -28,6 +28,7 @@ final class AccordionViewController: UIViewController {
         tableView.register(SectionHeaderView.nib,
                            forHeaderFooterViewReuseIdentifier: SectionHeaderView.identifier)
         tableView.tableFooterView = UIView()
+        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
     }

@@ -19,12 +19,12 @@ final class CustomTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         textView.delegate = self
-        
+        textView.layer.cornerRadius = 10
+
     }
     
     func configure(section: Section) {
         textView.text = section.text
-        textView.layer.cornerRadius = 10
     }
     
 }

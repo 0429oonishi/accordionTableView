@@ -14,7 +14,7 @@ final class SampleViewController: UIViewController {
         
     }
     
-    static func instaintiate() -> UIViewController {
+    static func instaintiate() -> SampleViewController {
         let vc = UIStoryboard(name: "Sample", bundle: nil).instantiateViewController(identifier: String(describing: self)) as! SampleViewController
         return vc
     }
