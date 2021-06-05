@@ -11,27 +11,42 @@ final class SectionHeaderView: UITableViewHeaderFooterView {
     
     static var identifier: String { String(describing: self) }
     static var nib: UINib { UINib(nibName: String(describing: self), bundle: nil) }
-    var onTapEvent: ((Int) -> Void)?
-    var section: Int?
+    var buttonDidTapped: (() -> Void)?
+    var onTapEvent: (() -> Void)?
+    var isExpanded = false
+    
+    @IBOutlet private weak var view: UIView!
+    @IBOutlet private weak var label: UILabel!
+    @IBOutlet private weak var timeLabel1: UILabel!
+    @IBOutlet private weak var timeLabel2: UILabel!
+    @IBOutlet private weak var button: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(didTapped))
-        self.addGestureRecognizer(tapGR)
+        self.view.addGestureRecognizer(tapGR)
         
     }
     
-    func configure(title: String, section: Int, onTapEvent: @escaping (Int) -> Void) {
-        self.textLabel?.text = title
-        self.section = section
-        self.onTapEvent = onTapEvent
+    @objc private func didTapped() {
+        onTapEvent?()
     }
     
-    @objc private func didTapped(gestureRecognizer: UITapGestureRecognizer) {
-        guard let headerView = gestureRecognizer.view as? SectionHeaderView,
-              let section = headerView.section else { return }
-        onTapEvent?(section)
+    @IBAction private func buttonDidTapped(_ sender: UIButton) {
+        UIView.setAnimationsEnabled(false)
+        button.setTitle("\(isExpanded ? "▼" : "▲") メモ", for: .normal)
+        button.layoutIfNeeded()
+        UIView.setAnimationsEnabled(true)
+        isExpanded.toggle()
+        buttonDidTapped?()
+    }
+    
+    func configure(section: Section, buttonDidTapped: @escaping () -> Void) {
+        self.buttonDidTapped = buttonDidTapped
+        label.text = section.title
+        timeLabel1.text = "今日: \(section.time.today)分"
+        timeLabel2.text = "合計: \(section.time.total)分"
     }
     
 }

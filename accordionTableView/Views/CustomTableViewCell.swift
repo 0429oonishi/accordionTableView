@@ -13,9 +13,24 @@ final class CustomTableViewCell: UITableViewCell {
     static var nib: UINib { UINib(nibName: String(describing: self), bundle: nil) }
     
     @IBOutlet private weak var textView: UITextView!
+    var didChanged: (() -> Void)?
     
-    func configure(title: String) {
-        textView.text = title
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        textView.delegate = self
+        
     }
     
+    func configure(section: Section) {
+        textView.text = section.text
+        textView.layer.cornerRadius = 10
+    }
+    
+}
+
+extension CustomTableViewCell: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        didChanged?()
+    }
 }
